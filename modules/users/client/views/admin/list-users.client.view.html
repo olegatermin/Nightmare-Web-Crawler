@@ -1,0 +1,38 @@
+<section>
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-4">
+        <h1>Users</h1>
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <input class="form-control col-md-4" type="text" ng-model="vm.search" placeholder="Search" ng-change="vm.figureOutItemsToDisplay()" />
+      </div>
+      <div class="col-md-4" style="margin-top: 2em">
+        <a class="btn btn-primary pull-right" ui-sref="admin.user-create">
+          <i class="glyphicon glyphicon-plus"></i> Add
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="list-group">
+    <div ng-repeat="user in vm.pagedItems" class="list-group-item">
+      <div class="list-group-item-text pull-right">
+        <button ng-repeat="category in vm.categories"
+         class="btn {{vm.isSubscribedTo(user, category) ? 'btn-success' : 'btn-danger'}}"
+         ng-bind="category.name"
+         ng-click="vm.updateCategory(user, category)">
+        </button>
+      </div>
+      <a ui-sref="admin.user-edit({userId: user._id})">
+        <h4 class="list-group-item-heading" ng-bind="user.username"></h4>
+        <div>
+          <p class="list-group-item-text pull-right small" ng-bind="user.roles"></p>
+          <p class="list-group-item-text" ng-bind="user.email"></p>
+        </div>
+        
+      </a>
+    </div>
+  </div>
+
+  <uib-pagination boundary-links="true" max-size="8" items-per-page="vm.itemsPerPage" total-items="vm.filterLength" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></uib-pagination>
+</section>

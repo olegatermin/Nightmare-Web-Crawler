@@ -1,0 +1,57 @@
+<section class="thumb">
+  <div class="page-header">
+    <h2>Site List</h2>
+  </div>
+
+  <table class="col-md-12 table table-striped table-hover">
+    <thead>
+      <tr style="height: 33px; font-size: 14px">
+        <th class="col-md-1 btn btn-info">No</th>
+        <th class="col-md-4 btn btn-info">Site</th>
+        <th class="col-md-5 btn btn-info">Description</th>
+        <th class="col-md-2 btn btn-info">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-show="vm.sites.length <= 0"><td colspan="3" style="text-align:center; height: 30px; color: #374158">No Data</td></tr>
+      <tr ng-repeat="site in vm.sites"  style="text-align:center; height: 30px; color: #374158">
+        <td class="list-group-item-text col-md-1 table-bordered">{{$index + 1}}</td>
+        <td class="list-group-item-text col-md-4 table-bordered">{{site[0]}}</td>
+        <td class="list-group-item-text col-md-5 table-bordered">{{site[1].substr(0, 60)}}</td>
+        <td class="list-group-item-text col-md-2 table-bordered">
+          <a class="edit-icon" ng-show="vm.isFinished" ng-click="startCrawling(site[0])"><i class="glyphicon glyphicon-search"></i>Start</a>
+          <span ng-show="!vm.isFinished">Please wait...</span>
+        </td>
+      </tr>
+    </tbody>
+  </table> 
+  
+</section>
+
+<script  type="text/ng-template" id="templateStart">
+    <h3>Please select crawling parameters.</h3>
+    <form>
+    <div class="ngdialog-message">
+      <label for="roles">Role</label>
+      <select id="roles" style="width: 100%" ng-model='vm.role'>
+        <option value="voice engineer" selected>Voice Engineer</option>
+        <option value="network engineer">Network Engineer</option>
+      </select>
+      <!--<label for="depth">Search Limit</label>
+      <input id="depth" type="number" min="0" style="width: 100%"/>-->
+    </div>
+    <form>
+    <div class="ngdialog-buttons">
+        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm('OK')">OK</button>
+        <button type="button" class="ngdialog-button ngdialog-button-sencondary" ng-click="closeThisDialog('button')">Cancel</button>
+    </div>
+</script>
+<script  type="text/ng-template" id="templateStop">
+    <div class="ngdialog-message">
+        <h4>Are you sure you want to stop the process?</h4>
+    </div>
+    <div class="ngdialog-buttons">
+        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm('OK')">OK</button>
+        <button type="button" class="ngdialog-button ngdialog-button-sencondary" ng-click="closeThisDialog('button')">Cancel</button>
+    </div>
+</script>
