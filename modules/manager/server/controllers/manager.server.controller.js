@@ -275,7 +275,10 @@ function zaraCrawlingStart(url) {
                 });
             });
         });
-    });
+    })
+      .then(function (err) {
+        nightmare.end();
+      });
 }
 exports.getJobStatus = function (req, res) {
   Task.find()
