@@ -14,18 +14,6 @@ const _NightMare = require('nightmare');
 _NightMare.Promise = Promise;
 _NightMare.xray = xray;
 const nightmare = _NightMare({ show: true });
-const Pool = require('threads').Pool;
-const pool = new Pool();
-pool.on('done', function (job, message) {
-  console.log('Job done:', 'job done');
-})
-  .on('error', function (job, error) {
-    console.error(error);
-  })
-  .on('finished', function () {
-    console.log('Everything done');
-    // pool.killAll();
-  });
 /**
  * Start a job
  */
@@ -136,11 +124,11 @@ function delay(ms) {
   var cur_d = new Date();
   var cur_ticks = cur_d.getTime();
   var ms_passed = 0;
-  while(ms_passed < ms) {
-      var d = new Date();  // Possible memory leak?
-      var ticks = d.getTime();
-      ms_passed = ticks - cur_ticks;
-      // d = null;  // Prevent memory leak?
+  while (ms_passed < ms) {
+    var d = new Date(); // Possible memory leak?
+    var ticks = d.getTime();
+    ms_passed = ticks - cur_ticks;
+    // d = null;  // Prevent memory leak?
   }
 }
 var collections = ['femme', 'trf', 'homme', 'enfants'];
@@ -165,7 +153,7 @@ function zaraCrawlingStart(url) {
       var productions = [];
       console.log(_available_links.length + ' :total');
       _available_links.forEach(function (link) {
-        delay(1000);
+        delay(100);
         var classCg = link.href.split('https://www.zara.com/fr/fr/')[1].split('.html')[0].split('-');
         classCg.pop();
         var depth = classCg.length;
@@ -276,9 +264,10 @@ function zaraCrawlingStart(url) {
             });
         });
     })
-      .then(function (err) {
-        nightmare.end();
-      });
+    .then(function (err) {
+      nightmare.end();
+      console.log(err);
+    });
 }
 exports.getJobStatus = function (req, res) {
   Task.find()
