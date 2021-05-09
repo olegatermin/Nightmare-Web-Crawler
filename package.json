@@ -80,7 +80,7 @@
     "jasmine-core": "~2.7.0",
     "json2csv-stream": "^0.1.4",
     "jsonwebtoken": "^8.4.0",
-    "lodash": "~4.17.4",
+    "lodash": "~4.17.21",
     "lusca": "~1.5.1",
     "method-override": "^2.3.10",
     "mongoose": "^4.11.14",
