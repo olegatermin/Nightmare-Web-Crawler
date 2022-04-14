@@ -39,7 +39,7 @@
   "dependencies": {
     "acl": "^0.4.11",
     "amazon-s3-uri": "0.0.3",
-    "async": "~2.5.0",
+    "async": "~3.2.2",
     "aws-sdk": "^2.123.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
